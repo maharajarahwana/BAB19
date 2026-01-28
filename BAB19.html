@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB19</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB1</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Latihan Kosakata</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 15px;
+  }
+  button {
+    margin-top: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  .result {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .wrong { color: red; }
+  .correct { color: green; }
+  ol { text-align:left; max-height:400px; overflow:auto; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="question"></h2>
+  <input type="text" id="answerInput" placeholder="Tulis jawaban di sini">
+  <br>
+  <button id="nextBtn">Selanjutnya</button>
+</div>
+
+<script>
+let questions = [
+{ soal: "요리", jawaban: "masakan" },
+{ soal: "소고기", jawaban: "daging sapi" },
+{ soal: "음식의 맛", jawaban: "rasa makanan" },
+{ soal: "생일날", jawaban: "hari ulang tahun" },
+{ soal: "맛이 좋다", jawaban: "rasanya enak" },
+{ soal: "돼지고기", jawaban: "daging babi" },
+{ soal: "맵다", jawaban: "pedas" },
+{ soal: "원래", jawaban: "sebenarnya" },
+{ soal: "파", jawaban: "daun bawang" },
+{ soal: "닭고기", jawaban: "daging ayam" },
+{ soal: "양파", jawaban: "bawang bombay" },
+{ soal: "아기를 낳다", jawaban: "melahirkan bayi" },
+{ soal: "마늘", jawaban: "bawang putih" },
+{ soal: "채소", jawaban: "sayuran" },
+{ soal: "당근", jawaban: "wortel" },
+{ soal: "주신", jawaban: "diberikan" },
+{ soal: "달다", jawaban: "manis / memasang" },
+{ soal: "은혜", jawaban: "berkat / karunia" },
+{ soal: "양념", jawaban: "bumbu" },
+{ soal: "기억하다", jawaban: "mengingat" },
+{ soal: "짜다", jawaban: "asin" },
+{ soal: "의미", jawaban: "makna / arti" },
+{ soal: "소금", jawaban: "garam" },
+{ soal: "삼계탕", jawaban: "sup ayam ginseng" },
+{ soal: "싱겁다", jawaban: "hambar" },
+{ soal: "여름", jawaban: "musim panas" },
+{ soal: "설탕", jawaban: "gula" },
+{ soal: "복날", jawaban: "hari yang panas" },
+{ soal: "쓰다", jawaban: "pahit" },
+{ soal: "어린 닭", jawaban: "ayam muda" },
+{ soal: "후추", jawaban: "merica" },
+{ soal: "인삼", jawaban: "ginseng" },
+{ soal: "시다", jawaban: "asam" },
+{ soal: "찹쌀", jawaban: "beras ketan" },
+{ soal: "간장", jawaban: "kecap asin" },
+{ soal: "밤", jawaban: "malam / buah kastanye" },
+{ soal: "고소하다", jawaban: "gurih" },
+{ soal: "깎다", jawaban: "mengupas (buah)" },
+{ soal: "시작", jawaban: "mulai" },
+{ soal: "레몬", jawaban: "lemon" },
+{ soal: "썰다", jawaban: "mengiris" },
+{ soal: "한번", jawaban: "sekali" },
+{ soal: "땀", jawaban: "keringat" },
+{ soal: "요리법", jawaban: "cara memasak" },
+{ soal: "흐르다", jawaban: "mengalir" },
+{ soal: "끓이다", jawaban: "merebus" },
+{ soal: "기운", jawaban: "kekuatan / tenaga" },
+{ soal: "샀다", jawaban: "membeli" },
+{ soal: "새힘이", jawaban: "tenaga baru" },
+{ soal: "가지다", jawaban: "memiliki" },
+{ soal: "떡국", jawaban: "sup kue beras" },
+{ soal: "다니다", jawaban: "pergi" },
+{ soal: "설날", jawaban: "Imlek (hari raya)" },
+{ soal: "떡볶이", jawaban: "teokbokki" },
+{ soal: "몰려 둘러 앉아", jawaban: "duduk berkelompok" },
+{ soal: "볶다", jawaban: "menumis" },
+{ soal: "멸치", jawaban: "ikan teri" },
+{ soal: "제료", jawaban: "bahan" },
+{ soal: "흰떡", jawaban: "kue beras putih" },
+{ soal: "튀기다", jawaban: "menggoreng" },
+{ soal: "계란", jawaban: "telur" },
+{ soal: "굽다", jawaban: "mengukus" },
+{ soal: "지단", jawaban: "irisan telur" },
+{ soal: "찌개를 데우다", jawaban: "memanaskan kuah" },
+{ soal: "김", jawaban: "rumput laut" },
+{ soal: "조리법", jawaban: "cara memasak" },
+{ soal: "새해", jawaban: "tahun baru" },
+{ soal: "특별 한날", jawaban: "hari yang istimewa" },
+{ soal: "서로", jawaban: "saling" },
+{ soal: "고기", jawaban: "daging" },
+{ soal: "미역국", jawaban: "sup rumput laut" },
+{ soal: "생선", jawaban: "ikan" },
+];
+
+// Acak soal
+questions = questions.sort(() => Math.random() - 0.5);
+
+let index = 0;
+let score = 0;
+let userAnswers = [];
+
+const questionEl = document.getElementById("question");
+const answerInput = document.getElementById("answerInput");
+const nextBtn = document.getElementById("nextBtn");
+const card = document.querySelector(".card");
+
+function showQuestion() {
+  questionEl.textContent = "Soal " + (index + 1) + ": " + questions[index].soal;
+  answerInput.value = "";
+  answerInput.focus();
+}
+
+nextBtn.addEventListener("click", () => {
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  userAnswers[index] = userAnswer; // simpan jawaban sesuai index
+
+  if (userAnswer === questions[index].jawaban) {
+    score++;
+  }
+
+  index++;
+  if (index < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  let answerList = "";
+  questions.forEach((q, i) => {
+    if (userAnswers[i] === q.jawaban) {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span></li>`;
+    } else {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span><br>
+                     Jawaban kamu: <span class="wrong">${userAnswers[i] || "(kosong)"}</span></li>`;
+    }
+  });
+
+  card.innerHTML = `
+    <h2>Hasil</h2>
+    <p class="result">Nilai: ${score} / ${questions.length}</p>
+    <hr>
+    <p>Kunci Jawaban:</p>
+    <ol>${answerList}</ol>
+  `;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
